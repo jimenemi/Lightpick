@@ -57,6 +57,7 @@
         tooltipNights: false,
         orientation: 'auto',
         disableWeekends: false,
+        disableWeekDays: null,
         locale: {
             buttons: {
                 prev: '&leftarrow;',
@@ -235,6 +236,16 @@
             day.className.push('is-disabled');
         }
 
+        if (opts.disableWeekDays) {
+            for (var i = 0; i < opts.disableWeekDays.length; i++) {
+                if (opts.disableWeekDays[i]) {
+                    if (date.isoWeekday() == opts.disableWeekDays[i]) {
+                        day.className.push('is-disabled');
+                    }
+                }
+            }
+        }
+        
         day.className = day.className.filter(function(value, index, self) {
             return self.indexOf(value) === index;
         });
